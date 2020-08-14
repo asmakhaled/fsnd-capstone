@@ -6,3 +6,5 @@ export API_AUDIENCE='capstone'
 export CLIENT_ID='OJexo9qKwUpl0eVyD9HIZklsxBKw7L3X'
 export DATABASE_URL='postgres://localhost:5432/capstone'
 export EXCITED=true
+export FLASK_APP=app.py
+export FLASK_ENV=development
