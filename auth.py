@@ -38,7 +38,7 @@ def get_token_auth_header():
         raise AuthError({
             'code': 'Not autherization',
             'description': 'Autherization is not included in the request'
-        }, 400)
+        }, 401)
 
     auth_header = request.headers['Authorization']
     header_parts = auth_header.split(' ')

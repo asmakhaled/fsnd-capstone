@@ -4,9 +4,9 @@ from models import setup_db, Reviewer, Project, Assignment, db_drop_and_create_a
 from flask_cors import CORS
 from auth import AuthError, requires_auth
 
+
 # full stack capstone
 def create_app(test_config=None):
-
     app = Flask(__name__)
     setup_db(app)
     CORS(app)
@@ -202,7 +202,7 @@ def create_app(test_config=None):
     @app.route('/assignments', methods=['GET'])
     @requires_auth(permission='write:projects')
     @requires_auth(permission='write:reviewers')
-    def get_assignments(a,b):
+    def get_assignments(a, b):
         reviewers = Assignment.query.all()
         reviewers_formated = [reviewer.format() for reviewer in reviewers]
         result = {
@@ -273,7 +273,7 @@ def create_app(test_config=None):
     @app.route('/')
     def get_greeting():
         excited = os.environ['EXCITED']
-        greeting = "Hello" 
+        greeting = "Hello"
         if excited == 'true': greeting = greeting + "!!!!!"
         return greeting
 
@@ -286,10 +286,11 @@ def create_app(test_config=None):
 
 app = create_app()
 
-
 '''
     handle autherization errors
 '''
+
+
 @app.errorhandler(AuthError)
 def handleAuthError(error):
     print("auth erorr", error)
@@ -298,6 +299,7 @@ def handleAuthError(error):
         "error": error.status_code,
         "message": error.error
     }), 401
+
 
 @app.errorhandler(406)
 def handleError406(error):
@@ -308,9 +310,12 @@ def handleError406(error):
         "message": "Could not create new resource"
     }), 406
 
+
 '''
 Example error handling for unprocessable entity
 '''
+
+
 @app.errorhandler(422)
 def unprocessable(error):
     return jsonify({
@@ -318,6 +323,16 @@ def unprocessable(error):
         "error": 422,
         "message": "unprocessable"
     }), 422
+
+
+@app.errorhandler(500)
+def internalError(error):
+    return jsonify({
+        "success": False,
+        "error": 500,
+        "message": "Internal server error"
+    }), 500
+
 
 if __name__ == '__main__':
     app.run()
