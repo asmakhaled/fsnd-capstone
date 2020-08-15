@@ -38,30 +38,6 @@ def setup_db(app, database_path=database_path):
     db.create_all()
 
 
-'''
-Person
-Have title and release year
-'''
-
-
-class Person(db.Model):
-    __tablename__ = 'People'
-
-    id = Column(Integer, primary_key=True)
-    name = Column(String)
-    catchphrase = Column(String)
-
-    def __init__(self, name, catchphrase=""):
-        self.name = name
-        self.catchphrase = catchphrase
-
-    def format(self):
-        return {
-            'id': self.id,
-            'name': self.name,
-            'catchphrase': self.catchphrase}
-
-
 class Project(db.Model):
     __tablename__ = 'projects'
 
@@ -72,9 +48,8 @@ class Project(db.Model):
         'Reviewer',
         secondary="assignments")
 
-    def __init__(self, length, genre, name):
-        self.length = length
-        self.genre = genre
+    def __init__(self, category,  name):
+        self.category = category
         self.name = name
 
     def insert(self):
@@ -91,8 +66,8 @@ class Project(db.Model):
     def format(self):
         return {
             'id': self.id,
-            'length': self.length,
-            'genre': self.genre,
+            'category': self.category,
+            'name': self.name,
             'reviewers': [x.name for x in self.reviewers]
         }
 
@@ -137,5 +112,24 @@ class Assignment(db.Model):
     reviewer_id = db.Column(db.Integer, db.ForeignKey('reviewers.id'))
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
 
-    user = db.relationship(Reviewer, backref=db.backref("assignments", cascade="all, delete-orphan"))
-    product = db.relationship(Project, backref=db.backref("assignments", cascade="all, delete-orphan"))
+    reviewer = db.relationship(Reviewer, backref=db.backref("assignments", cascade="all, delete-orphan"))
+    project = db.relationship(Project, backref=db.backref("assignments", cascade="all, delete-orphan"))
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
+        print("user", self.reviewer.format())
+        return {
+            'id': self.id,
+            'reviewer': self.reviewer.format(),
+            'project': self.project.format()
+        }
