@@ -288,7 +288,7 @@ def create_app(test_config=None):
             "success": False,
             "error": error.status_code,
             "message": error.error
-        }), 401
+        }), error.status_code
 
     @app.errorhandler(406)
     def handleError406(error):
