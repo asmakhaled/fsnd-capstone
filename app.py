@@ -281,6 +281,44 @@ def create_app(test_config=None):
     def be_cool():
         return "Be cool, man, be coooool! You're almost a FSND grad!"
 
+    @app.errorhandler(AuthError)
+    def handleAuthError(error):
+        print("auth erorr", error)
+        return jsonify({
+            "success": False,
+            "error": error.status_code,
+            "message": error.error
+        }), 401
+
+    @app.errorhandler(406)
+    def handleError406(error):
+        print(error)
+        return jsonify({
+            "success": False,
+            "error": 406,
+            "message": "Could not create new resource"
+        }), 406
+
+    '''
+    Example error handling for unprocessable entity
+    '''
+
+    @app.errorhandler(422)
+    def unprocessable(error):
+        return jsonify({
+            "success": False,
+            "error": 422,
+            "message": "unprocessable"
+        }), 422
+
+    @app.errorhandler(500)
+    def internalError(error):
+        return jsonify({
+            "success": False,
+            "error": 500,
+            "message": "Internal server error"
+        }), 500
+
     return app
 
 
@@ -291,47 +329,7 @@ app = create_app()
 '''
 
 
-@app.errorhandler(AuthError)
-def handleAuthError(error):
-    print("auth erorr", error)
-    return jsonify({
-        "success": False,
-        "error": error.status_code,
-        "message": error.error
-    }), 401
 
-
-@app.errorhandler(406)
-def handleError406(error):
-    print(error)
-    return jsonify({
-        "success": False,
-        "error": 406,
-        "message": "Could not create new resource"
-    }), 406
-
-
-'''
-Example error handling for unprocessable entity
-'''
-
-
-@app.errorhandler(422)
-def unprocessable(error):
-    return jsonify({
-        "success": False,
-        "error": 422,
-        "message": "unprocessable"
-    }), 422
-
-
-@app.errorhandler(500)
-def internalError(error):
-    return jsonify({
-        "success": False,
-        "error": 500,
-        "message": "Internal server error"
-    }), 500
 
 
 if __name__ == '__main__':

@@ -58,12 +58,19 @@ class CapstoneTest(unittest.TestCase):
         self.assertEqual(body['success'], True)
 
     # Assignments tests
-    def test_get_assignments_with_authentication_success(self):
+    def test_get_assignments_with_manager_authentication_success(self):
         res = self.client().get('/assignments', headers={
             "Authorization": 'bearer '+self.manager_token})
         body = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(body['success'], True)
+
+    def test_get_assignments_with_sales_authentication_should_fail(self):
+        res = self.client().get('/assignments', headers={
+            "Authorization": 'bearer '+self.sales_token})
+        body = json.loads(res.data)
+        self.assertEqual(res.status_code, 401)
+        self.assertEqual(body['success'], False)
 
     # Projects tests
     def test_get_projects_with_authentication_success(self):
