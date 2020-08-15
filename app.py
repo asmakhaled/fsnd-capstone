@@ -1,6 +1,6 @@
 import os
 from flask import Flask, jsonify, abort, request
-from models import setup_db, Reviewer, Project, Assignment
+from models import setup_db, Reviewer, Project, Assignment, db_drop_and_create_all
 from flask_cors import CORS
 from auth import AuthError, requires_auth
 
@@ -21,6 +21,14 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Credentials', 'true')
         return response
 
+    @app.route('/clearAll', methods=['GET'])
+    @requires_auth('write:reviewers')
+    @requires_auth('write:projects')
+    def clear_all(a, b):
+        db_drop_and_create_all()
+        return jsonify({"success": True, "message": "all db cleared"})
+
+    # Reviewers
     @app.route('/reviewers')
     @requires_auth(permission='read:reviewers')
     def get_reviewers(jwt):

@@ -108,6 +108,7 @@ class Reviewer(db.Model):
 
 class Assignment(db.Model):
     __tablename__ = 'assignments'
+
     id = db.Column(db.Integer, primary_key=True)
     reviewer_id = db.Column(db.Integer, db.ForeignKey('reviewers.id'))
     project_id = db.Column(db.Integer, db.ForeignKey('projects.id'))
