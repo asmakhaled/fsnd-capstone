@@ -216,7 +216,8 @@ def create_app(test_config=None):
     @requires_auth(permission='write:reviewers')
     def delete_assignments(a, b, assignment_id):
         try:
-            reviewer = Assignment.query.filter_by(id=assignment_id).one_or_none()
+            reviewer = Assignment.query.filter_by(
+                id=assignment_id).one_or_none()
             reviewer.delete()
             return jsonify({
                 'success': True
@@ -234,8 +235,9 @@ def create_app(test_config=None):
         try:
             reviewer = Reviewer.query.filter_by(id=reviewer_id).one_or_none()
             project = Project.query.filter_by(id=project_id).one_or_none()
-            previous_assignments = Assignment.query.filter(Assignment.reviewer_id == reviewer_id,
-                                                           Assignment.project_id == project_id).count()
+            previous_assignments = Assignment.query.filter(
+                Assignment.reviewer_id == reviewer_id,
+                Assignment.project_id == project_id).count()
 
             if previous_assignments > 0:
                 raise AuthError({
@@ -274,7 +276,8 @@ def create_app(test_config=None):
     def get_greeting():
         excited = os.environ['EXCITED']
         greeting = "Hello"
-        if excited == 'true': greeting = greeting + "!!!!!"
+        if excited == 'true':
+            greeting = greeting + "!!!!!"
         return greeting
 
     @app.route('/coolkids')
@@ -323,14 +326,6 @@ def create_app(test_config=None):
 
 
 app = create_app()
-
-'''
-    handle autherization errors
-'''
-
-
-
-
 
 if __name__ == '__main__':
     app.run()
