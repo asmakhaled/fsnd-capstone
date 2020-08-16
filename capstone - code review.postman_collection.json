@@ -1,0 +1,925 @@
+{
+	"info": {
+		"_postman_id": "4adb85e3-96f6-4649-b92c-a8f02eb8a99b",
+		"name": "capstone - code review",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "manager",
+			"item": [
+				{
+					"name": "clear all db",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/clearAll",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"clearAll"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06823ac2-a332-4fdd-b876-33749c5a4c0d",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"hassaswws\",\n    \"email\": \"es@s.com\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/reviewers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "ed9a1652-d035-4830-9901-1fc17221f76a",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains drinks array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/reviewers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewers/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "6a5ac27e-6686-4752-9659-707319d37740",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"new nfffame\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/reviewers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewers/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "169c4baf-a710-40ef-98ac-e7bd87be367d",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/reviewers/2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/projects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/projects",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/projects",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"awesfefome project\",\n    \"category\": \"ios\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/projects",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/projects",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"awesome project\",\n    \"category\": \"ios\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/projects/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/projects",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"sawesomesss project\",\n    \"category\": \"ios\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/projects/3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"projects",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reviewer_id\": 1,\n    \"project_id\": 1\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/assignment",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"assignment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reviewer_id\": 1,\n    \"project_id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/assignments",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"assignments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assignment",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"reviewer_id\": 1,\n    \"project_id\": 3\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/assignments/6",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"assignments",
+								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlFVUTVNREkxTUVJNE5UYzJNall3TXpsRk16RTBSVVpHUlRRMU1rRkZNalZET1RSRVEwWkdNZyJ9.eyJpc3MiOiJodHRwczovL21vYXRob3RobWFuLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjM1YjRhNjg4MTcwMTAwMzcwMjE5ZDQiLCJhdWQiOlsiY2Fwc3RvbmUiLCJodHRwczovL21vYXRob3RobWFuLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTc0OTM2MTYsImV4cCI6MTYwMDA4NTYxNiwiYXpwIjoiT0pleG85cUt3VXBsMGVWeUQ5SElaa2xzeEJLdzdMM1giLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIGFkZHJlc3MgcGhvbmUiLCJndHkiOiJwYXNzd29yZCIsInBlcm1pc3Npb25zIjpbInJlYWQ6cHJvamVjdHMiLCJyZWFkOnJldmlld2VycyIsInVwZGF0ZTpwcm9qZWN0cyIsInVwZGF0ZTpyZXZpZXdlcnMiLCJ3cml0ZTpwcm9qZWN0cyIsIndyaXRlOnJldmlld2VycyJdfQ.mOIowjb2b593HMio76kZKiGBDwOszGj0k2yZh0OaX2bA-a_XYQBA5M8L_jW72YX6io34DTgL0V6LptAUvEeihHfjo_dpct0xI5iz7hgSIJWCH1wggrsRXWGSvr2R-S538XmJ9wxj20-Gfn7eO6dZyQ-OeUwSmC0INWZqL1BaGLy49mbwAwSR9Z4UHXPZ9GQ-Q0EoFDkr5ASlOmVAy62F6IAkWTnmYWiRKC2s6IWNGumM_Y3srT0nlTB58rsP2SvCBrqsMeYYcGCxTaYj-vwxu1dEa5C7xoVpMy_0xAScbquNSSzWS_ZGBRCD1OddfE2FOtI0jvHl479VyAxnX5RCZw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "2e74d4d9-467f-41ba-9f9f-49fd3de2e0a6",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "42339640-39de-4cae-9f7a-61fd7b131bf5",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Sales",
+			"item": [
+				{
+					"name": "/reviewers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "546d3b1f-fc24-41b4-9817-53a38570026f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains drinks array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/reviewers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewers Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "3cf3d89f-7aff-4e3b-bbf7-4111966d709f",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains drinks array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/reviewers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "52e5aa95-bf1e-4be9-b741-2918681040a1",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"hassass\",\n    \"email\": \"es@s.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/reviewers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewers/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "06094992-0c89-4176-abe4-f1aa2d519764",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"new name\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/reviewers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewers/1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4c8f16b0-c5dd-40d4-a105-b268e70b7f69",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/reviewers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlFVUTVNREkxTUVJNE5UYzJNall3TXpsRk16RTBSVVpHUlRRMU1rRkZNalZET1RSRVEwWkdNZyJ9.eyJpc3MiOiJodHRwczovL21vYXRob3RobWFuLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjM1YjQwZTAyMmYzYTAwM2QzYmY4ZDQiLCJhdWQiOlsiY2Fwc3RvbmUiLCJodHRwczovL21vYXRob3RobWFuLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTc0OTM3MjksImV4cCI6MTYwMDA4NTcyOSwiYXpwIjoiT0pleG85cUt3VXBsMGVWeUQ5SElaa2xzeEJLdzdMM1giLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIGFkZHJlc3MgcGhvbmUiLCJndHkiOiJwYXNzd29yZCIsInBlcm1pc3Npb25zIjpbInJlYWQ6cHJvamVjdHMiLCJyZWFkOnJldmlld2VycyJdfQ.WAFUNoGkDxKE_TIDV2eLS5CKL3ET_azHkWXo62xDXbHNZmage-qSGkiVSdw7b4NG7IY_dveOD_n2sdI0l2PFAbegSRz2OuXZwEjNS80bU15e4fFZ9yUBXIEecy7vNarRCHx5YsYWZYPdvIR1Ba2zoE1pz3YmvQ9SGgjtAvwF_sIJm5aqvgsEBYD2acHVec_tX3o979ocDspo_jT5efQidnKBKSBcL5uvDIMrP5t-RTjX8NXuQCt73gTszZEh9EjuQ3_5wK6e5AV59RnQK9oyskWKhfM2rCjtODhIFtKhB8Z1FScV8N6Oq19x_TLHhup_j7wIzyDfxOFczRpTohtzKw",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0e50c192-0341-4388-a954-d30319c6cffd",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "3096637c-ff57-4a17-a12d-837ad9725868",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Supervisor",
+			"item": [
+				{
+					"name": "/reviewers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "2ba62c22-38ff-4676-aabf-1c61080cc0ec",
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"value contains drinks array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.drinks).to.be.an('array')",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/reviewers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "e06c3719-19c4-489d-9fe9-41757bc80fb4",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"hassass\",\n    \"email\": \"es@s.com\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/reviewers",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewers/1 Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "4d63a42c-8038-4f39-8209-b0c32f8d4bdb",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\" : \"new name\"\n}"
+						},
+						"url": {
+							"raw": "{{host}}/reviewers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/reviewers/1 Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "bba8f85b-3d10-4f4b-b570-7f7173f75cd8",
+								"exec": [
+									"pm.test(\"Status code is 401\", function () {",
+									"    pm.response.to.have.status(401);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/reviewers/1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"reviewers",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlFVUTVNREkxTUVJNE5UYzJNall3TXpsRk16RTBSVVpHUlRRMU1rRkZNalZET1RSRVEwWkdNZyJ9.eyJpc3MiOiJodHRwczovL21vYXRob3RobWFuLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw1ZjM1YjQ4ODZhYTgwNTAwMzc2NjYyMjEiLCJhdWQiOlsiY2Fwc3RvbmUiLCJodHRwczovL21vYXRob3RobWFuLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1OTc0OTM1NzEsImV4cCI6MTYwMDA4NTU3MSwiYXpwIjoiT0pleG85cUt3VXBsMGVWeUQ5SElaa2xzeEJLdzdMM1giLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIGFkZHJlc3MgcGhvbmUiLCJndHkiOiJwYXNzd29yZCIsInBlcm1pc3Npb25zIjpbInJlYWQ6cHJvamVjdHMiLCJyZWFkOnJldmlld2VycyIsInVwZGF0ZTpwcm9qZWN0cyIsInVwZGF0ZTpyZXZpZXdlcnMiLCJ3cml0ZTpyZXZpZXdlcnMiXX0.ELwmhcQbKQq05l973xxURydyO_pTmd-bYXe9ZjdOiR6l9roKL7hKTORMyQmleKhKLLwmFz90qn1Gf-g-7XXebQT2KlRQXBNiAMOTb8eIkyH9MFUf307-EMkOxFvMYv8Fb3Jz_mE0pL_VZdGUtzPteec0HrocLr5Jjoh8XNiu89RS343f2zZhqrbD4VXPCXDt9yJrERIex_12B8w0Nb20ING-rrpiGVo52rjqOJW3JKcZW0ULZEd0A8aX1lxu7po5iPWrG7hC0BFD7uoZO4pQ3kLnP1V2-K67QsrE_1LDVHJfL93djWGpFq9yqIu1rOJO98BNskdLm2uWBBhKN4Im2Q",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "3694cb86-ecb5-4e91-bbc1-7fc8785b6751",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "a07789a3-9dc9-471c-b029-af1954370307",
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "get token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "client_id",
+							"value": "OJexo9qKwUpl0eVyD9HIZklsxBKw7L3X",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "0H_nLwPSDojP4r4s-t-XR3KGw5CW-yvx08PwDGyR8xTH_l_DeRJRIgSK0hQsf3F4",
+							"type": "text"
+						},
+						{
+							"key": "audience",
+							"value": "capstone",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "code-review-sales@cr.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "sales_1234",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "email",
+							"type": "text",
+							"disabled": true
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://wcp.eu.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"wcp",
+						"eu",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get token",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Cookie",
+						"value": "did=s%3Av0%3Aca448f60-6c6c-11ea-9b44-2f00ec3e5ae7.Y%2Br2QvMFBlADgUjOEyIKDxp4rzRwrumzqkCqgb%2BlxvU; did_compat=s%3Av0%3Aca448f60-6c6c-11ea-9b44-2f00ec3e5ae7.Y%2Br2QvMFBlADgUjOEyIKDxp4rzRwrumzqkCqgb%2BlxvU; auth0=s%3AIvPi3zIu0silHp9vbC5MJb8TPOZoXgrx.9BRI79%2FMSii%2B8%2BJw8K6E5b%2FDhS0Tj5Vdvpbgl5nq7Qk; auth0_compat=s%3AIvPi3zIu0silHp9vbC5MJb8TPOZoXgrx.9BRI79%2FMSii%2B8%2BJw8K6E5b%2FDhS0Tj5Vdvpbgl5nq7Qk"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"client_id\": \"OJexo9qKwUpl0eVyD9HIZklsxBKw7L3X\",\n  \"grant_type\": \"client_credentials\",\n  \"client_secret\": \"0H_nLwPSDojP4r4s-t-XR3KGw5CW-yvx08PwDGyR8xTH_l_DeRJRIgSK0hQsf3F4\",\n  \"audience\": \"capstone\"\n}"
+				},
+				"url": {
+					"raw": "https://moathothman.auth0.com/oauth/token",
+					"protocol": "https",
+					"host": [
+						"moathothman",
+						"auth0",
+						"com"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "8f95cb95-4d86-4b1a-a4e1-074db1e753dd",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "0e2568c0-163f-4da6-a3e7-db7e6835215b",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "7da0fa13-ecd9-4d7d-8e38-fde2c81cfdaf",
+			"key": "host",
+			"value": "localhost:5000",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

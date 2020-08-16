@@ -6,7 +6,9 @@ from flask_sqlalchemy import SQLAlchemy
 from app import create_app
 from models import setup_db, db_drop_and_create_all
 
+
 class CapstoneTest(unittest.TestCase):
+
     def setUp(self):
         self.sales_token = os.environ['sales_token']
         self.supervisor_token = os.environ['supervisor_token']
@@ -39,21 +41,21 @@ class CapstoneTest(unittest.TestCase):
     # Reviewers Tests
     def test_get_reviewers_with_sales_authentication_success(self):
         res = self.client().get('/reviewers', headers={
-            "Authorization": 'bearer '+self.sales_token})
+            "Authorization": 'bearer ' + self.sales_token})
         body = self.make_request_with_token(self.sales_token)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(body['success'], True)
 
     def test_get_reviewers_with_supervisor_authentication_success(self):
         res = self.client().get('/reviewers', headers={
-            "Authorization": 'bearer '+self.supervisor_token})
+            "Authorization": 'bearer ' + self.supervisor_token})
         body = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(body['success'], True)
 
     def test_get_reviewers_with_manager_authentication_success(self):
         res = self.client().get('/reviewers', headers={
-            "Authorization": 'bearer '+self.manager_token})
+            "Authorization": 'bearer ' + self.manager_token})
         body = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(body['success'], True)
@@ -75,21 +77,21 @@ class CapstoneTest(unittest.TestCase):
     # Assignments tests
     def test_get_assignments_with_manager_authentication_success(self):
         res = self.client().get('/assignments', headers={
-            "Authorization": 'bearer '+self.manager_token})
+            "Authorization": 'bearer ' + self.manager_token})
         body = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(body['success'], True)
 
     def test_get_assignments_with_sales_autharization_should_fail(self):
         res = self.client().get('/assignments', headers={
-            "Authorization": 'bearer '+self.sales_token})
+            "Authorization": 'bearer ' + self.sales_token})
         body = json.loads(res.data)
         self.assertEqual(res.status_code, 403)
         self.assertEqual(body['success'], False)
 
     def test_delete_assignments_with_sales_autharization_should_fail(self):
         res = self.client().delete('/assignments/1', headers={
-            "Authorization": 'bearer '+self.sales_token})
+            "Authorization": 'bearer ' + self.sales_token})
         body = json.loads(res.data)
         self.assertEqual(res.status_code, 403)
         self.assertEqual(body['success'], False)
@@ -99,7 +101,7 @@ class CapstoneTest(unittest.TestCase):
         self.post_reviewer(self.manager_token)
         self.post_assignment(self.manager_token)
         res = self.client().delete('/assignments/1', headers={
-            "Authorization": 'bearer '+self.manager_token})
+            "Authorization": 'bearer ' + self.manager_token})
         body = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(body['success'], True)
@@ -126,7 +128,7 @@ class CapstoneTest(unittest.TestCase):
     # Projects tests
     def test_get_projects_with_authentication_success(self):
         res = self.client().get('/projects', headers={
-            "Authorization": 'bearer '+self.sales_token})
+            "Authorization": 'bearer ' + self.sales_token})
         body = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertEqual(body['success'], True)
@@ -149,7 +151,7 @@ class CapstoneTest(unittest.TestCase):
     def test_delete_projects_with_manager_authorization_success(self):
         self.post_project(self.manager_token)
         res = self.client().delete('/projects/1', headers={
-            "Authorization": 'bearer '+self.manager_token})
+            "Authorization": 'bearer ' + self.manager_token})
         data = json.loads(res.data)
         self.assertEqual(res.status_code, 200)
         self.assertTrue(data['success'])
@@ -174,7 +176,7 @@ class CapstoneTest(unittest.TestCase):
 
     def post_project(self, token):
         return self.client().post('/projects',
-                           json={'name': "test", 'category': 'movie'}, headers={
+                                  json={'name': "test", 'category': 'movie'}, headers={
                 "Authorization": 'bearer ' + token})
 
     def post_reviewer(self, token):
@@ -184,8 +186,9 @@ class CapstoneTest(unittest.TestCase):
 
     def post_assignment(self, token):
         return self.client().post('/assignment',
-                           json={'reviewer_id': "1", 'project_id': "1"}, headers={
+                                  json={'reviewer_id': "1", 'project_id': "1"}, headers={
                 "Authorization": 'bearer ' + token})
+
 
 if __name__ == "__main__":
     unittest.main()
