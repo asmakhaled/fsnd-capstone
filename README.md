@@ -43,7 +43,7 @@ createdb capstone
 createdb capstone_test
 ```
 
-## Running the server
+iuyhkuytnmjjg,.kjhfjhg7yhnmhg## Running the server
 
 From within the `/` directory first ensure you are working using your created virtual environment.
 

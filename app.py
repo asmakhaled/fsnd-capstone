@@ -21,6 +21,13 @@ def create_app(test_config=None):
         response.headers.add('Access-Control-Allow-Credentials', 'true')
         return response
 
+    @app.route('/', methods=['GET'])
+    def get_api_request():
+        return jsonify({
+            'success': True,
+            'Message': 'Code Review App is working fine'
+        })
+
     @app.route('/clearAll', methods=['GET'])
     @requires_auth('write:reviewers')
     @requires_auth('write:projects')
